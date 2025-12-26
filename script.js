@@ -13,7 +13,7 @@ function log(text){
 
 function speak(text){
   if (recognition) recognition.stop(); // 🔥 STOP listening
-
+// kamill bhatt
   speechSynthesis.cancel();
   const msg = new SpeechSynthesisUtterance(text);
   msg.rate = 0.9;
@@ -25,7 +25,7 @@ function speak(text){
       recognition.start(); // 🔥 RESUME listening
     }, 500);
   };
-
+// kamill bhatt
   speechSynthesis.speak(msg);
   log("JARVIS: " + text);
 }
@@ -68,7 +68,7 @@ recognition.interimResults = true;
     if (text.includes("hi") || text.includes("hello")) {
       speak("Hello. How can I assist you?");
     }
-
+// kamill bhatt
     if (text.includes("who are you")) {
       speak("I am Jarvis. Your personal artificial intelligence.");
     }
@@ -82,7 +82,7 @@ recognition.interimResults = true;
       mode.textContent = "COMBAT MODE";
       speak("Combat mode activated.");
     }
-
+// kamill bhatt
     if (text.includes("analysis")) {
       document.body.style.color = "#ffb000";
       mode.textContent = "ANALYSIS MODE";
