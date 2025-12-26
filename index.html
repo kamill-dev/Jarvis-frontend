@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JARVIS AI</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Orbitron,monospace}
+body{background:#000;color:#ffb000;overflow:hidden}
+
+/* HUD */
+.hud{
+ position:absolute;
+ top:50%;left:50%;
+ width:360px;height:360px;
+ transform:translate(-50%,-50%);
+}
+
+.ring{
+ position:absolute;border-radius:50%;
+ border:2px solid currentColor;
+ box-shadow:0 0 30px currentColor;
+}
+
+.r1{width:360px;height:360px;animation:spin 18s linear infinite}
+.r2{width:260px;height:260px;top:50px;left:50px;border-style:dashed;animation:spinR 10s linear infinite}
+.r3{width:160px;height:160px;top:100px;left:100px;animation:spin 4s linear infinite}
+
+.core{
+ position:absolute;width:80px;height:80px;
+ top:140px;left:140px;border-radius:50%;
+ background:radial-gradient(circle,#fff5,currentColor);
+ box-shadow:0 0 60px currentColor,0 0 140px currentColor;
+ animation:pulse 2s infinite;
+}
+
+.scan{
+ position:absolute;width:100%;height:2px;
+ background:linear-gradient(90deg,transparent,currentColor,transparent);
+ animation:scan 2s linear infinite;
+}
+
+.title{text-align:center;margin-top:380px;letter-spacing:6px}
+.mode{text-align:center;font-size:12px;opacity:.8}
+
+.console{
+ position:absolute;bottom:-120px;width:100%;
+ height:90px;font-size:11px;opacity:.8;overflow:hidden
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinR{to{transform:rotate(-360deg)}}
+@keyframes pulse{50%{transform:scale(1.4)}}
+@keyframes scan{0%{top:0}100%{top:100%}}
+</style>
+</head>
+
+<body>
+
+<div class="hud">
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="ring r3"></div>
+  <div class="scan"></div>
+  <div class="core"></div>
+
+  <div class="title"> K.A.M.I.L</div>
+  <div class="mode" id="mode">ONLINE</div>
+  <div class="console" id="console"></div>
+</div>
+
+<script>
+/* ===== SPEAK ===== */
+function speak(text){
+  const msg=new SpeechSynthesisUtterance(text);
+  msg.rate=0.9; msg.pitch=0.8;
+  speechSynthesis.speak(msg);
+
+  log("JARVIS: "+text);
+}
+
+/* ===== CONSOLE ===== */
+const con=document.getElementById("console");
+function log(t){
+ con.innerHTML+=t+"<br>";
+ con.scrollTop=9999;
+}
+
+/* ===== STARTUP ===== */
+log("Booting neural systems...");
+setTimeout(()=>log("AI core online."),700);
+setTimeout(()=>speak("System online. Awaiting your command."),1400);
+
+/* ===== VOICE LISTEN ===== */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(SR){
+ const rec=new SR();
+ rec.continuous=true;
+ rec.lang="en-US";
+
+ rec.onresult=e=>{
+  const text=e.results[e.results.length-1][0].transcript.toLowerCase();
+  log("YOU: "+text);
+
+  if(text.includes("hi")||text.includes("hello")||text.includes("hey")){
+    speak("Hello. How can I assist you?");
+  }
+
+  if(text.includes("who are you")){
+    speak("I am Jarvis. Your personal artificial intelligence.");
+  }
+
+  if(text.includes("status")){
+    speak("All systems are functioning normally.");
+  }
+
+  if(text.includes("combat")){
+    document.body.style.color="#ff0033";
+    mode.textContent="COMBAT MODE";
+    speak("Combat mode activated.");
+  }
+
+  if(text.includes("analysis")){
+    document.body.style.color="#ffb000";
+    mode.textContent="ANALYSIS MODE";
+    speak("Analysis mode engaged.");
+  }
+ };
+
+ rec.start();
+}
+</script>
+
+</body>
+</html>
