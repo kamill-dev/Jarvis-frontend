@@ -139,7 +139,5 @@ If you like this project, feel free to ⭐ the repository!
 
 This project is open-source and free to use for learning and personal projects.
 
-🔥 Pro Tip
 
-Every small improvement = one commit = more green squares on GitHub 📈
-Keep building, keep pushing 🚀
+Dont forget to give star to this repo
