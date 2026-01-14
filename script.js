@@ -77,6 +77,13 @@ recognition.interimResults = true;
       speak("All systems are functioning normally.");
     }
 
+        if (text.includes("analysis")) {
+      document.body.style.color = "#ffb000";
+      mode.textContent = "ANALYSIS MODE";
+      speak("Analysis mode engaged.");
+    }
+  };
+
     if (text.includes("combat")) {
       document.body.style.color = "#ff0033";
       mode.textContent = "COMBAT MODE";
