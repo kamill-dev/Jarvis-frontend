@@ -12,7 +12,7 @@ function log(text){
 }
 
 function speak(text){
-  if (recognition) recognition.stop(); // 🔥 STOP listening
+  if (recognition) recognition.stop(); //  STOP listening
 // kamill bhatt
   speechSynthesis.cancel();
   const msg = new SpeechSynthesisUtterance(text);
@@ -22,7 +22,7 @@ function speak(text){
 
   msg.onend = () => {
     setTimeout(() => {
-      recognition.start(); // 🔥 RESUME listening
+      recognition.start(); //  RESUME listening
     }, 500);
   };
 // kamill bhatt
